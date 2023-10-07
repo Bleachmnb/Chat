@@ -132,35 +132,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Chat-gui\ClientChat.cpp" />
-    <ClCompile Include="Chat-gui\gui.cpp" />
-    <ClCompile Include="Chat-gui\ImGuiChat.cpp" />
-    <ClCompile Include="Chat-gui\main.cpp" />
-    <ClCompile Include="Chat-gui\user.cpp" />
-    <ClCompile Include="ImGui\imgui.cpp" />
-    <ClCompile Include="ImGui\imgui_demo.cpp" />
-    <ClCompile Include="ImGui\imgui_draw.cpp" />
-    <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
-    <ClCompile Include="ImGui\imgui_impl_dx9.cpp" />
-    <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
-    <ClCompile Include="ImGui\imgui_tables.cpp" />
-    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="src\Chat-gui\ClientChat.cpp" />
+    <ClCompile Include="src\Chat-gui\engine.cpp" />
+    <ClCompile Include="src\Chat-gui\gui.cpp" />
+    <ClCompile Include="src\Chat-gui\main.cpp" />
+    <ClCompile Include="src\Chat-gui\user.cpp" />
+    <ClCompile Include="src\ImGui\imgui.cpp" />
+    <ClCompile Include="src\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="src\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="src\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="src\ImGui\imgui_impl_dx9.cpp" />
+    <ClCompile Include="src\ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="src\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="src\ImGui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Chat-gui\Chat.h" />
-    <ClInclude Include="Chat-gui\ClientChat.h" />
-    <ClInclude Include="Chat-gui\gui.h" />
-    <ClInclude Include="Chat-gui\ImGuiChat.h" />
-    <ClInclude Include="Chat-gui\user.h" />
-    <ClInclude Include="ImGui\imconfig.h" />
-    <ClInclude Include="ImGui\imgui.h" />
-    <ClInclude Include="ImGui\imgui_impl_dx11.h" />
-    <ClInclude Include="ImGui\imgui_impl_dx9.h" />
-    <ClInclude Include="ImGui\imgui_impl_win32.h" />
-    <ClInclude Include="ImGui\imgui_internal.h" />
-    <ClInclude Include="ImGui\imstb_rectpack.h" />
-    <ClInclude Include="ImGui\imstb_textedit.h" />
-    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="src\Chat-gui\Chat.h" />
+    <ClInclude Include="src\Chat-gui\ChatUtils.h" />
+    <ClInclude Include="src\Chat-gui\ChatUtils.cpp" />
+    <ClInclude Include="src\Chat-gui\ClientChat.h" />
+    <ClInclude Include="src\Chat-gui\engine.h" />
+    <ClInclude Include="src\Chat-gui\gui.h" />
+    <ClInclude Include="src\Chat-gui\Channel.h" />
+    <ClInclude Include="src\Chat-gui\user.h" />
+    <ClInclude Include="src\ImGui\imconfig.h" />
+    <ClInclude Include="src\ImGui\imgui.h" />
+    <ClInclude Include="src\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="src\ImGui\imgui_impl_dx9.h" />
+    <ClInclude Include="src\ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="src\ImGui\imgui_internal.h" />
+    <ClInclude Include="src\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="src\ImGui\imstb_textedit.h" />
+    <ClInclude Include="src\ImGui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
