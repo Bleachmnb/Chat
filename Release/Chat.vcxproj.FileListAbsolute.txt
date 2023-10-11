@@ -1,3 +1,0 @@
-C:\Users\edoar\source\repos\Chat\Release\Chat.exe
-C:\Users\edoar\source\repos\Chat\Release\Chat.vcxproj.CopyComplete
-C:\Users\edoar\source\repos\Chat\Release\cpprest142_2_10.dll

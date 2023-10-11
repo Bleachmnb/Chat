@@ -4,11 +4,10 @@
 
 #include <iostream>
 
-#include "engine.h"
-#include "user.h"
-#include "gui.h"
-#include "Channel.h"
-#include "ClientChat.h"
+#include "User/user.h"
+#include "Gui/gui.h"
+#include "Channel/Channel.h"
+#include "Client/ClientChat.h"
 
 namespace Chat
 {

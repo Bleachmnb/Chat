@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Chat-gui\engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Chat-gui\gui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Chat-gui\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,23 +42,20 @@
     <ClCompile Include="src\ImGui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Chat-gui\user.cpp">
+    <ClCompile Include="src\Chat-gui\Engine\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Chat-gui\ClientChat.cpp">
+    <ClCompile Include="src\Chat-gui\Client\ClientChat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chat-gui\Gui\gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chat-gui\User\user.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Chat-gui\engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Chat-gui\gui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Chat-gui\user.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\ImGui\imconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -92,16 +83,22 @@
     <ClInclude Include="src\ImGui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Chat-gui\ClientChat.h">
+    <ClInclude Include="src\Chat-gui\Engine\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Chat-gui\ChatUtils.h">
+    <ClInclude Include="src\Chat-gui\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Chat-gui\ChatUtils.cpp">
+    <ClInclude Include="src\Chat-gui\Channel\Channel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Chat-gui\Channel.h">
+    <ClInclude Include="src\Chat-gui\Client\ClientChat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Chat-gui\Gui\gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Chat-gui\User\user.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Chat-gui\Chat.h">

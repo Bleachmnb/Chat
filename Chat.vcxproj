@@ -42,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -108,10 +108,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,18 +127,19 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Chat-gui\ClientChat.cpp" />
-    <ClCompile Include="src\Chat-gui\engine.cpp" />
-    <ClCompile Include="src\Chat-gui\gui.cpp" />
+    <ClCompile Include="src\Chat-gui\Client\ClientChat.cpp" />
+    <ClCompile Include="src\Chat-gui\Gui\gui.cpp" />
     <ClCompile Include="src\Chat-gui\main.cpp" />
-    <ClCompile Include="src\Chat-gui\user.cpp" />
+    <ClCompile Include="src\Chat-gui\Engine\Engine.cpp" />
+    <ClCompile Include="src\Chat-gui\User\user.cpp" />
     <ClCompile Include="src\ImGui\imgui.cpp" />
     <ClCompile Include="src\ImGui\imgui_demo.cpp" />
     <ClCompile Include="src\ImGui\imgui_draw.cpp" />
@@ -147,14 +150,13 @@
     <ClCompile Include="src\ImGui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Chat-gui\Channel\Channel.h" />
     <ClInclude Include="src\Chat-gui\Chat.h" />
-    <ClInclude Include="src\Chat-gui\ChatUtils.h" />
-    <ClInclude Include="src\Chat-gui\ChatUtils.cpp" />
-    <ClInclude Include="src\Chat-gui\ClientChat.h" />
-    <ClInclude Include="src\Chat-gui\engine.h" />
-    <ClInclude Include="src\Chat-gui\gui.h" />
-    <ClInclude Include="src\Chat-gui\Channel.h" />
-    <ClInclude Include="src\Chat-gui\user.h" />
+    <ClInclude Include="src\Chat-gui\Client\ClientChat.h" />
+    <ClInclude Include="src\Chat-gui\Gui\gui.h" />
+    <ClInclude Include="src\Chat-gui\pch.h" />
+    <ClInclude Include="src\Chat-gui\Engine\Engine.h" />
+    <ClInclude Include="src\Chat-gui\User\user.h" />
     <ClInclude Include="src\ImGui\imconfig.h" />
     <ClInclude Include="src\ImGui\imgui.h" />
     <ClInclude Include="src\ImGui\imgui_impl_dx11.h" />

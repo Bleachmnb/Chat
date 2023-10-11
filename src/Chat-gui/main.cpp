@@ -1,39 +1,38 @@
-#include "Chat.h"
+#include "Engine/Engine.h"
 
-int __stdcall wWinMain(HINSTANCE instance, HINSTANCE previusInstance, PWSTR arguments, int CommandShow)
+#ifdef _WINDLL
+
+HANDLE hCurrentUIThread = nullptr;
+
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved)
 {
-	engine::CreateHWindow("Chat Login", 1280, 800);
-	engine::CreateDevice();
-	engine::CreateImGui();
+    if (fdwReason == DLL_PROCESS_ATTACH)
+    {
+        DisableThreadLibraryCalls(hinstDLL);
+        UI::hCurrentModule = hinstDLL;
+        hCurrentUIThread = CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)UI::Render, nullptr, NULL, nullptr);
+    }
 
-	//UserProfile::MakeConfigDir();
-	//UserProfile::CheckConfigFile();
+    if (fdwReason == DLL_PROCESS_DETACH)
+        TerminateThread(hCurrentUIThread, 0);
 
-	while (engine::exit)
-	{
-		engine::BeginRender();
-		gui::MainGui();
-		engine::EndRender();
-		std::this_thread::sleep_for(std::chrono::milliseconds(0));
-	}
-
-	engine::DestroyImGui();
-	engine::DestroyDevice();
-	engine::DestroyHWindow();
-
-
-	return EXIT_SUCCESS;
+    return TRUE;
 }
 
-//int main()
-//{
-//
-//	UserProfile::MakeConfigDir();
-//	UserProfile::CheckConfigFile();
-//
-//	while (1)
-//	{
-//
-//	}
-//	return 0;
-//}
+#endif 
+
+
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nShowCmd)
+{
+
+    ENGINE::Render();
+
+    return 0;
+}
+
+int main(void)
+{
+    ENGINE::Render();
+
+    return 0;
+}
