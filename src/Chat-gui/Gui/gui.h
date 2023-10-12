@@ -6,6 +6,7 @@
 
 namespace gui
 {
+	inline bool				SendChatMessage;
 	inline bool				bDraw;
 	inline LPCSTR			lpWindowName;
 	inline ImVec2			vWindowSize;
@@ -14,10 +15,10 @@ namespace gui
 	inline bool				HidePassword;
 	inline const char		*NameState;
 	inline ImVec2			ScreenSize;
+	inline ImVec2			LastMessagePos;
 
-
-	void Active();
-	bool isActive();
+	void	Active();
+	bool	isActive();
 
 	void	Init();
 	/*  function for customizing the style/colors of the gui   */
@@ -31,6 +32,7 @@ namespace gui
 	bool	ButtonWithPos(const char* Label, ImVec2 Size, ImVec2 Pos);
 	void	InputTextWithPos(const char *label, char *buf, size_t size ,ImVec2 Pos, ImGuiInputTextFlags_ flag = ImGuiInputTextFlags_None);
 	bool	BeginChildWithPos(const char* Label, ImVec2 Size, bool Border, ImVec2 Pos);
+	void	TextWithBox(const char* Text, ImVec2 Pos, bool IsTextDisabilited);
 
 	/* Chat UI*/
 	void	ChatPage();

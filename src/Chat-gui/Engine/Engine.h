@@ -21,16 +21,19 @@ private:
 	static void CleanupDeviceD3D();
 	static void CreateRenderTarget();
 	static void CleanupRenderTarget();
-	static void DestroyAll();
-	static void InitImGui();
+	static void InitApp();
 	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 public:
-	static HMODULE hCurrentModule;
-	inline static WNDCLASSEX wc;
+	inline static ImGuiConfigFlags   ConfFlags;
 	inline static HWND hwnd;
+	inline static WNDCLASSEX wc;
+	static HMODULE hCurrentModule;
+	inline static bool bDone = false;
+	inline static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 	static void Render();
+	static void DestroyAll();
 
 };
 

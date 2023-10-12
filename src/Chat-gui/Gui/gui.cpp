@@ -101,6 +101,12 @@ bool gui::BeginChildWithPos(const char *Label, ImVec2 Size, bool Border, ImVec2 
 	return ImGui::BeginChild(Label, Size, Border);
 }
 
+void gui::TextWithBox(const char* Text, ImVec2 Pos, bool IsTextDisabilited)
+{
+	ImGui::Selectable("##test", true, ImGuiSelectableFlags_Disabled);
+	gui::TextWithPos(Text, Pos, IsTextDisabilited);
+}
+
 void gui::LoginForm()
 {
 	ImGuiInputTextFlags_	flag;
@@ -188,17 +194,22 @@ void gui::RegiterForm()
 
 void gui::ChatPage()
 {
-	ImGui::SetCursorPos(ImVec2(200, 160));
+	ImGui::SetCursorPos(ImVec2(200, 100));
 	ImGui::BeginChild("##MainPanel", ImVec2(900, 600), true);
 	{
-		ImGui::SetCursorPos(ImVec2(100 , ImGui::GetWindowSize().y - 60 ));
-		ImGui::PushItemWidth((ImGui::GetWindowSize().x / 2 - 100)  * 2);
-		if (ImGui::InputText("##ChatMessage", UserProfile::Message, IM_ARRAYSIZE(UserProfile::Message)))
+		if (gui::SendChatMessage)
 		{
-			ImGui::Text("wow va");
+			gui::TextWithBox(UserProfile::Message, ImVec2(20, 10), false);
 		}
+
 	}
 	ImGui::EndChild();
+	ImGui::SetCursorPos(ImVec2(230 , ImGui::GetWindowSize().y - 60 ));
+	ImGui::PushItemWidth((ImGui::GetWindowSize().x / 2 - 220)  * 2);
+	if (ImGui::InputText("##ChatMessage", UserProfile::Message, IM_ARRAYSIZE(UserProfile::Message), ImGuiInputTextFlags_EnterReturnsTrue))
+	{
+		gui::SendChatMessage = true;
+	}
 }
 
 void gui::MainGui()

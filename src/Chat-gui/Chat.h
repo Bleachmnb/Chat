@@ -11,5 +11,17 @@
 
 namespace Chat
 {
+	class Chat
+	{
+		private:
 
+
+
+		public:
+
+
+
+
+
+	};
 }

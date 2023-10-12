@@ -10,6 +10,21 @@ using namespace std;
 
 namespace UserProfile
 {
+	enum class Suit { Online, Afk, DoNotDisturb, offline };
+
+	class User
+	{
+		private:
+			bool Registed = false;
+			bool Logged = false;
+			char Email[25];
+			char Password[25];
+
+		public:
+			int DiffPassword(char* str);
+
+	};
+
 	inline bool Logged			= false;
 	inline bool Registed		= false;
 	inline bool RemindMe		= false;
@@ -24,7 +39,7 @@ namespace UserProfile
 	bool CheckConfigFile();
 
 	bool CheckPassword(char* str);
-	bool DiffPassword(char* pass1, char* pass2);
+	//bool DiffPassword(char* pass1, char* pass2);
 	
 	bool MakeConfigDir();
 	bool WriteFile(const char* str);

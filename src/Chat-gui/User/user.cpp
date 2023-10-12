@@ -1,5 +1,7 @@
 #include "user.h"
 
+using namespace UserProfile;
+
 std::string ReturnString(std::string StringToParse)
 {
 	int			i = 0;
@@ -42,23 +44,19 @@ bool WCheckUpperCase(char* str)
 	return 0;
 }
 
+int	 User::DiffPassword(char* str)
+{
+	if (!User::Password) 
+		return 3;
+	if (strcmp(str, User::Password) == 0) 
+		return 0;
+	return 1;
+}
+
 bool UserProfile::CheckPassword(char *str)
 {
 	if (WCheckUpperCase(str) == 1 && strlen(str) > 7 && WCheckNum(str) && WCheckSpecial(str)) return true;
 	return false;
-}
-
-bool UserProfile::DiffPassword(char* pass1, char* pass2)
-{
-	int i = 0;
-
-	if (strlen(pass1) != strlen(pass2)) return 1;
-	while (pass1[i] && pass2[i])
-	{
-		if (pass1[i] != pass2[i]) return 1;
-		i++;
-	}
-	return 0;
 }
 
 bool UserProfile::MakeConfigDir()
@@ -136,14 +134,9 @@ bool UserProfile::CheckConfigFile()
 	}
 	Config.close();
 	if (i != 3)
-	{
 		return false;
-	}
 	if (!ClientChat::Login(email.c_str(), password.c_str()))
-	{
-
 		return false;
-	}
 	else
 	{
 		UserProfile::Logged = true;

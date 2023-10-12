@@ -136,7 +136,7 @@ void ENGINE::DestroyAll()
 #endif
 }
 
-void ENGINE::Render()
+void ENGINE::InitApp()
 {
     ImGui_ImplWin32_EnableDpiAwareness();
     ENGINE::wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, _T("ImGui Standalone"), nullptr };
@@ -188,14 +188,69 @@ void ENGINE::Render()
     ImGui_ImplDX11_Init(pd3dDevice, pd3dDeviceContext);
 
 
-    const ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-    bool bDone = false;
-
     UserProfile::MakeConfigDir();
     UserProfile::CheckConfigFile();
     gui::Init();
 
+    ConfFlags = io.ConfigFlags;
+}
+
+void ENGINE::Render()
+{
+   /* ImGui_ImplWin32_EnableDpiAwareness();
+    ENGINE::wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, _T("ImGui Standalone"), nullptr };
+    ::RegisterClassEx(&ENGINE::wc);
+    ENGINE::hwnd = ::CreateWindow(ENGINE::wc.lpszClassName, _T("ImGui Standalone"), WS_OVERLAPPEDWINDOW, 100, 100, 50, 50, NULL, NULL, ENGINE::wc.hInstance, NULL);
+
+    if (!CreateDeviceD3D(hwnd))
+    {
+        CleanupDeviceD3D();
+        ::UnregisterClass(wc.lpszClassName, wc.hInstance);
+        return;
+    }
+
+    ::ShowWindow(hwnd, SW_HIDE);
+    ::UpdateWindow(hwnd);
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
+    ImGui::StyleColorsDark();
+
+    ImGuiStyle& style = ImGui::GetStyle();
+    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    {
+        style.WindowRounding = 4.0f;
+        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+    }
+
+    const HMONITOR monitor = MonitorFromWindow(ENGINE::hwnd, MONITOR_DEFAULTTONEAREST);
+    MONITORINFO info = {};
+    info.cbSize = sizeof(MONITORINFO);
+    GetMonitorInfo(monitor, &info);
+    const int monitor_height = info.rcMonitor.bottom - info.rcMonitor.top;
+
+    if (monitor_height > 1080)
+    {
+        const float fScale = 2.0f;
+        ImFontConfig cfg;
+        cfg.SizePixels = 13 * fScale;
+        ImGui::GetIO().Fonts->AddFontDefault(&cfg);
+    }
+
+    ImGui::GetIO().IniFilename = nullptr;
+
+    ImGui_ImplWin32_Init(hwnd);
+    ImGui_ImplDX11_Init(pd3dDevice, pd3dDeviceContext);
+
+
+    UserProfile::MakeConfigDir();
+    UserProfile::CheckConfigFile();
+    gui::Init();*/
+    InitApp();
     while (!bDone)
     {
         MSG msg;
@@ -227,7 +282,7 @@ void ENGINE::Render()
         pd3dDeviceContext->ClearRenderTargetView(pMainRenderTargetView, clear_color_with_alpha);
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        if (ConfFlags & ImGuiConfigFlags_ViewportsEnable)
         {
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
@@ -240,5 +295,4 @@ void ENGINE::Render()
             break;
 #endif
     }
-    DestroyAll();
 }
