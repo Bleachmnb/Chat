@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include <cpprest/filestream.h>
+//#include <cpprest/filestream.h>
 
-using namespace utility;
+//using namespace utility;
 
 #define MAXCHANNELTEXTHISTORY 5000
 #define MAXCHANNELSTRINGLENGHT 300

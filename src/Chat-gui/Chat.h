@@ -1,27 +1,23 @@
 #pragma once
 
-
-
 #include <iostream>
 
-#include "User/user.h"
 #include "Gui/gui.h"
+#include "User/user.h"
+#include "EngineGui/EngineGui.h"
 #include "Channel/Channel.h"
-#include "Client/ClientChat.h"
+#include "HttpsConnection/HttpsConnection.h"
 
-namespace Chat
-{
-	class Chat
-	{
-		private:
-
-
-
-		public:
-
-
-
-
-
-	};
-}
+//
+//using namespace HttpsConnection;
+//
+//class Chat
+//{
+//	private:
+//
+//	public:
+//		bool CheckAll(ConnectioServer Cs);
+//		Chat();
+//		~Chat();
+//
+//};

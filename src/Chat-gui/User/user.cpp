@@ -61,14 +61,14 @@ bool UserProfile::CheckPassword(char *str)
 
 bool UserProfile::MakeConfigDir()
 {
-	ofstream Config;
+	std::ofstream Config;
 	fs::current_path(fs::temp_directory_path());
 
-	string TmpPath = string(fs::temp_directory_path().string());
+	std::string TmpPath = std::string(fs::temp_directory_path().string());
 	
 	TmpPath.append("ChatConfig");
 	
-	filesystem::path filepath = TmpPath;
+	std::filesystem::path filepath = TmpPath;
 	
 	if (!fs::exists(filepath))
 	{
@@ -78,7 +78,7 @@ bool UserProfile::MakeConfigDir()
 
 	TmpPath.append("\\ConfigFile.txt");
 	
-	filesystem::path correct_path = filesystem::path(TmpPath);
+	std::filesystem::path correct_path = std::filesystem::path(TmpPath);
 
 	if (fs::exists(correct_path))
 		return true;
@@ -93,18 +93,18 @@ bool UserProfile::MakeConfigDir()
 bool UserProfile::CheckConfigFile()
 {
 	int			i = 0;
-	ifstream	Config;
-	string		email;
-	string		password;
+	std::ifstream	Config;
+	std::string		email;
+	std::string		password;
 	std::string ConfigText;
 
 	fs::current_path(fs::temp_directory_path());
 	
-	string TmpPath = string(fs::temp_directory_path().string());
+	std::string TmpPath = std::string(fs::temp_directory_path().string());
 	
 	TmpPath.append("ChatConfig\\ConfigFile.txt");
 	
-	filesystem::path correct_path = filesystem::path(TmpPath);
+	std::filesystem::path correct_path = std::filesystem::path(TmpPath);
 	
 	if (!fs::exists(correct_path))
 		return false;
@@ -122,12 +122,12 @@ bool UserProfile::CheckConfigFile()
 			}
 			else if (ConfigText.find("Email"))
 			{
-				email = string(ReturnString(ConfigText));
+				email = std::string(ReturnString(ConfigText));
 				i++;
 			}
 			else if (ConfigText.find("Password"))
 			{
-				password = string(ReturnString(ConfigText));
+				password = std::string(ReturnString(ConfigText));
 				i++;
 			}
 		}
@@ -135,7 +135,7 @@ bool UserProfile::CheckConfigFile()
 	Config.close();
 	if (i != 3)
 		return false;
-	if (!ClientChat::Login(email.c_str(), password.c_str()))
+	if (!HttpsConnection::Login(email.c_str(), password.c_str()))
 		return false;
 	else
 	{
@@ -146,15 +146,15 @@ bool UserProfile::CheckConfigFile()
 
 bool UserProfile::WriteFile(const char* str)
 {
-	ofstream Config;
+	std::ofstream Config;
 
 	fs::current_path(fs::temp_directory_path());
 
-	string TmpPath = string(fs::temp_directory_path().string());
+	std::string TmpPath = std::string(fs::temp_directory_path().string());
 
 	TmpPath.append("ChatConfig\\ConfigFile.txt");
 
-	filesystem::path correct_path = filesystem::path(TmpPath);
+	std::filesystem::path correct_path = std::filesystem::path(TmpPath);
 
 	Config.open(correct_path);
 

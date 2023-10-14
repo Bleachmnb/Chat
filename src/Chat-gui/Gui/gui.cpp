@@ -1,4 +1,5 @@
 #include "gui.h"
+#include <string> 
 
 
 void gui::Init()
@@ -9,9 +10,9 @@ void gui::Init()
 	gui::bDraw = true;
 }
 
-void gui::Active()
+void gui::Active(bool x)
 {
-	gui::bDraw = true;
+	gui::bDraw = x;
 }
 
 bool gui::isActive()
@@ -127,11 +128,11 @@ void gui::LoginForm()
 	ImGui::SetCursorPos(ImVec2(210, 320));
 	if (ImGui::Button("Login", ImVec2(170, 50)))
 	{
-		if (ClientChat::Login(UserProfile::Email, UserProfile::Password))
+		if (HttpsConnection::Login(UserProfile::Email, UserProfile::Password))
 		{
 			ImGui::Text("succesfull Loged");
 			
-			string TextToFile = string("Logged\nEmail=");
+			std::string TextToFile = std::string("Logged\nEmail=");
 			TextToFile.append(UserProfile::Email);
 			TextToFile.append("\nPassword=");
 			TextToFile.append(UserProfile::Password);
@@ -173,7 +174,7 @@ void gui::RegiterForm()
 		{
 			if (UserProfile::CheckPassword(UserProfile::Password) && strcmp(UserProfile::Password, UserProfile::ConfermationPassword) == 0)
 			{
-				if (ClientChat::Register(UserProfile::Email, UserProfile::Password))
+				if (HttpsConnection::Register(UserProfile::Email, UserProfile::Password))
 				{
 					ImGui::Text("succesfull regitration");
 					UserProfile::Registed = true;
@@ -201,7 +202,6 @@ void gui::ChatPage()
 		{
 			gui::TextWithBox(UserProfile::Message, ImVec2(20, 10), false);
 		}
-
 	}
 	ImGui::EndChild();
 	ImGui::SetCursorPos(ImVec2(230 , ImGui::GetWindowSize().y - 60 ));
@@ -212,32 +212,48 @@ void gui::ChatPage()
 	}
 }
 
-void gui::MainGui()
+void gui::ServerDownPage()
 {
-	if (isActive())
+	ImGui::Text("cazzo");
+}
+
+void gui::MainGui(HttpsConnection::ConnectioServer &Server)
+{
+	if (isActive() && !ServerOff)
 	{
 		ImGui::SetNextWindowSize(vWindowSize, ImGuiCond_Once);
 		ImGui::Begin(lpWindowName, &bDraw, WindowFlags);
 		{
-			ChatPage();
+			if (Server.GetConnectionState() != 1 && !Server.CheckServer())
+			{
+				ServerOff = true;
+			}
 
-			//if (UserProfile::Logged)
-			//{
-			//	ChatPage();
-			//}
-			//else if (!UserProfile::Registed && !UserProfile::Logged)
-			//{
-			//	RegiterForm();
-			//}
-			//else if (UserProfile::Registed || !UserProfile::Logged)
-			//{
-			//	LoginForm();
-			//}
-
+			if (UserProfile::Logged)
+			{
+				ChatPage();
+			}
+			else if (!UserProfile::Registed && !UserProfile::Logged)
+			{
+				RegiterForm();
+			}
+			else if (UserProfile::Registed || !UserProfile::Logged)
+			{
+				LoginForm();
+			}
+	
 		}
 		ImGui::End();
 	}
-
+	else
+	{
+		ImGui::SetNextWindowSize(vWindowSize, ImGuiCond_Once);
+		ImGui::Begin(lpWindowName, &bDraw, WindowFlags);
+		{
+			ImGui::Text("Server is off");
+			gui::ButtonWithPos("##TryConnection", ImVec2(50, 50), ImVec2(100, 100));
+		}
+	}
 #ifdef _WINDLL
 	if (GetAsyncKeyState(VK_INSERT) & 1)
 		bDraw = !bDraw;

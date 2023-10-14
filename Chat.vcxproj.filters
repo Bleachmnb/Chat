@@ -42,16 +42,19 @@
     <ClCompile Include="src\ImGui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Chat-gui\Engine\Engine.cpp">
+    <ClCompile Include="src\Chat-gui\EngineGui\EngineGui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Chat-gui\Client\ClientChat.cpp">
+    <ClCompile Include="src\Chat-gui\HttpsConnection\HttpsConnection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Chat-gui\Gui\gui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Chat-gui\User\user.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chat-gui\Chat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,16 +86,13 @@
     <ClInclude Include="src\ImGui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Chat-gui\Engine\Engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Chat-gui\pch.h">
+    <ClInclude Include="src\Chat-gui\EngineGui\EngineGui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Chat-gui\Channel\Channel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Chat-gui\Client\ClientChat.h">
+    <ClInclude Include="src\Chat-gui\HttpsConnection\HttpsConnection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Chat-gui\Gui\gui.h">

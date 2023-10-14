@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../Client/ClientChat.h"
 #include <cstdlib>
 #include <fstream>
 #include <filesystem>
+#include "../HttpsConnection/HttpsConnection.h"
 
 namespace fs = std::filesystem;
-using namespace std;
 
 namespace UserProfile
 {

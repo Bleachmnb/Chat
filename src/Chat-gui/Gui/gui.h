@@ -1,11 +1,15 @@
 #pragma once
 
-#include "../Engine/Engine.h"
 #include "../User/user.h"
-#include "../Client/ClientChat.h"
+#include "../HttpsConnection/HttpsConnection.h"
+#include "../../ImGui/imgui.h"
+#include "../../ImGui/imgui_impl_dx11.h"
+#include "../../ImGui/imgui_impl_win32.h"
+#include "../EngineGui/EngineGui.h"
 
 namespace gui
 {
+	inline bool				ServerOff = false;
 	inline bool				SendChatMessage;
 	inline bool				bDraw;
 	inline LPCSTR			lpWindowName;
@@ -17,9 +21,8 @@ namespace gui
 	inline ImVec2			ScreenSize;
 	inline ImVec2			LastMessagePos;
 
-	void	Active();
+	void	Active(bool x);
 	bool	isActive();
-
 	void	Init();
 	/*  function for customizing the style/colors of the gui   */
 	void	ChatStyle();
@@ -38,9 +41,9 @@ namespace gui
 	void	ChatPage();
 	void	LoginForm();
 	void	RegiterForm();
-	
+	void	ServerDownPage();
 	
 	/* Main gui manager*/
-	void	MainGui();
+	void	MainGui(HttpsConnection::ConnectioServer &Server);
 
 }
