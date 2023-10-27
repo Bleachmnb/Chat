@@ -158,6 +158,7 @@ void EngineGui::InitApp()
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
     ImGui::StyleColorsDark();
 
@@ -216,8 +217,13 @@ bool EngineGui::ShouldQuit()
 
 void EngineGui::Render()
 {
+    auto static chat   = ChatSystem::App();
     auto static Server = HttpsConnection::ConnectioServer();
 
+    chat.User.InitFriendList(); //debug
+
+    if (Server.GetConnectionState() != 1 && !Server.CheckServer())
+        bDone = true;
     while (!bDone)
     {
         if (ShouldQuit() == true) break ;
@@ -226,7 +232,9 @@ void EngineGui::Render()
         ImGui_ImplWin32_NewFrame();
         
         ImGui::NewFrame();
-        gui::MainGui(Server);
+
+        gui::MainGui(Server, chat);
+        
         ImGui::EndFrame();
 
         ImGui::Render();

@@ -44,15 +44,6 @@ bool WCheckUpperCase(char* str)
 	return 0;
 }
 
-int	 User::DiffPassword(char* str)
-{
-	if (!User::Password) 
-		return 3;
-	if (strcmp(str, User::Password) == 0) 
-		return 0;
-	return 1;
-}
-
 bool UserProfile::CheckPassword(char *str)
 {
 	if (WCheckUpperCase(str) == 1 && strlen(str) > 7 && WCheckNum(str) && WCheckSpecial(str)) return true;
@@ -163,4 +154,24 @@ bool UserProfile::WriteFile(const char* str)
 	Config.close();
 	
 	return true;
+}
+
+Friend UserProfile::User::GetFriend(size_t index)
+{
+	auto l_front = FriendList.begin();
+
+	std::advance(l_front, index);
+
+	return *l_front;
+}
+
+void UserProfile::User::InitFriendList()
+{
+
+	FriendList.push_back(Friend("edoardo","redadoo",UserState::Offline));
+	FriendList.push_back(Friend("gabrielone", "Sdapocalypse", UserState::Offline));
+	FriendList.push_back(Friend("Davidone", "ZredScorpion", UserState::Offline));
+	FriendList.push_back(Friend("Antone", "LordLor", UserState::Offline));
+	FriendList.push_back(Friend("Wizantibus di dio", "wiz", UserState::Offline));
+	FriendList.push_back(Friend("Giosuè", "Terrone", UserState::Offline));
 }

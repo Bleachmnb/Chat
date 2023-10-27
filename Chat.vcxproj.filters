@@ -57,6 +57,9 @@
     <ClCompile Include="src\Chat-gui\Chat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Chat-gui\Gui\GuiUtils\GuiUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ImGui\imconfig.h">
@@ -89,9 +92,6 @@
     <ClInclude Include="src\Chat-gui\EngineGui\EngineGui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Chat-gui\Channel\Channel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Chat-gui\HttpsConnection\HttpsConnection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -102,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Chat-gui\Chat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Chat-gui\Gui\GuiUtils\GuiUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

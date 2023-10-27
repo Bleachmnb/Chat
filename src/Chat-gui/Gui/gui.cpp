@@ -1,6 +1,6 @@
 #include "gui.h"
 #include <string> 
-
+using namespace GuiUtils;
 
 void gui::Init()
 {
@@ -68,44 +68,50 @@ void gui::FormStyle()
 	}
 }
 
-void gui::TextWithPos(const char* Text, ImVec2 Pos, bool IsTextDisabilited)
+bool FriendIcon(ChatSystem::App& chat, size_t index)
 {
+	ImU32 color{};
 
-	ImGui::SetCursorPos(Pos);
-	if (IsTextDisabilited)
-		ImGui::TextDisabled(Text);
-	else
-		ImGui::Text(Text);
+	switch ((int)chat.User.GetFriend(index).GetState())
+	{
+		case(0):
+			color = IM_COL32(255, 0, 0, 255);
+			break;
+		case(1):
+			color = IM_COL32(0, 128, 0, 255);
+			break;
+		case(2):
+			color = IM_COL32(255, 255, 0, 255);
+			break;
+		case(3):
+			color = IM_COL32(192, 192, 192, 255);
+			break;
+		default:
+			break;
+	}
+
+	ImGui::Text((chat.User.GetFriend(index).GetName()));
+	ImGui::GetWindowDrawList()->AddCircleFilled(ImVec2(ImGui::GetWindowPos().x + 150, ImGui::GetWindowPos().y + 16), 5, color, 10);
+	ImGui::SetCursorPos(ImVec2(10, 10));
+	return ImGui::InvisibleButton("##SelectChat",ImVec2(10,10));
 }
 
-void gui::InputTextWithPos(const char* label, char *buf, size_t size, ImVec2 Pos, ImGuiInputTextFlags_ flag)
+void gui::FrientList(ChatSystem::App& chat)
 {
-	ImGui::SetCursorPos(Pos);
-	ImGui::InputText(label, buf, size, flag);
-}
-
-bool gui::CheckBoxWithPos(const char* label, bool* v, ImVec2 Pos)
-{
-	ImGui::SetCursorPos(Pos);
-	return ImGui::Checkbox(label,v);
-}
-
-bool gui::ButtonWithPos(const char* Label, ImVec2 Size, ImVec2 Pos)
-{
-	ImGui::SetCursorPos(Pos);
-	return ImGui::Button(Label, Size);
-}
-
-bool gui::BeginChildWithPos(const char *Label, ImVec2 Size, bool Border, ImVec2 Pos)
-{
-	ImGui::SetCursorPos(Pos);
-	return ImGui::BeginChild(Label, Size, Border);
-}
-
-void gui::TextWithBox(const char* Text, ImVec2 Pos, bool IsTextDisabilited)
-{
-	ImGui::Selectable("##test", true, ImGuiSelectableFlags_Disabled);
-	gui::TextWithPos(Text, Pos, IsTextDisabilited);
+	float YPos = 50;
+	ImGui::SetNextWindowSize(ImVec2(220, 700));
+	ImGui::Begin("FriendList", &bDraw, ImGuiWindowFlags_NoResize);
+	{
+		for (size_t i = 0; i < chat.User.FriendList.size(); i++)
+		{
+			ImGui::SetCursorPos(ImVec2(10, YPos));
+			YPos += 60;
+			ImGui::BeginChild(std::to_string(i).c_str(), ImVec2(180, 40), true);
+			FriendIcon(chat, i);
+			ImGui::EndChild();
+		}
+	}
+	ImGui::End();
 }
 
 void gui::LoginForm()
@@ -167,6 +173,8 @@ void gui::RegiterForm()
 		TextWithPos("Create Password", ImVec2(100 + 45, 230), false);
 		InputTextWithPos("##CreatePassword", UserProfile::Password, IM_ARRAYSIZE(UserProfile::Password), ImVec2(100 + 45, 250), flag);
 
+		//PasswordStrengthCheck();
+
 		TextWithPos("Confirm Password", ImVec2(100 + 45, 280), false);
 		InputTextWithPos("##ConfirmPassword", UserProfile::ConfermationPassword, IM_ARRAYSIZE(UserProfile::ConfermationPassword), ImVec2(100 + 45, 300), flag);
 
@@ -193,14 +201,20 @@ void gui::RegiterForm()
 	ImGui::EndChild();
 }
 
-void gui::ChatPage()
+void gui::ChatPage(ChatSystem::App& chat)
 {
+	FrientList(chat);
+	if (chat.User.FriendList.size() < 1)
+		return;
 	ImGui::SetCursorPos(ImVec2(200, 100));
 	ImGui::BeginChild("##MainPanel", ImVec2(900, 600), true);
 	{
 		if (gui::SendChatMessage)
 		{
-			gui::TextWithBox(UserProfile::Message, ImVec2(20, 10), false);
+	/*		chat.ChatFriend.AddMessage(UserProfile::Message);
+			memset(UserProfile::Message, '\0', 25);
+			gui::TextWithBox(chat.ChatFriend.ReturnMessage(0), ImVec2(20, 10), false);
+			SendChatMessage = false;*/
 		}
 	}
 	ImGui::EndChild();
@@ -217,32 +231,19 @@ void gui::ServerDownPage()
 	ImGui::Text("cazzo");
 }
 
-void gui::MainGui(HttpsConnection::ConnectioServer &Server)
+void gui::MainGui(HttpsConnection::ConnectioServer &Server, ChatSystem::App &chat)
 {
 	if (isActive() && !ServerOff)
 	{
 		ImGui::SetNextWindowSize(vWindowSize, ImGuiCond_Once);
 		ImGui::Begin(lpWindowName, &bDraw, WindowFlags);
-		{
-			if (Server.GetConnectionState() != 1 && !Server.CheckServer())
-			{
-				ServerOff = true;
-			}
-
-			if (UserProfile::Logged)
-			{
-				ChatPage();
-			}
-			else if (!UserProfile::Registed && !UserProfile::Logged)
-			{
-				RegiterForm();
-			}
-			else if (UserProfile::Registed || !UserProfile::Logged)
-			{
-				LoginForm();
-			}
-	
-		}
+		ChatPage(chat);
+			//if (UserProfile::Logged)
+			//	ChatPage();
+			//else if (!UserProfile::Registed && !UserProfile::Logged)
+			//	RegiterForm();
+			//else if (UserProfile::Registed || !UserProfile::Logged)
+			//	LoginForm();
 		ImGui::End();
 	}
 	else
@@ -251,7 +252,7 @@ void gui::MainGui(HttpsConnection::ConnectioServer &Server)
 		ImGui::Begin(lpWindowName, &bDraw, WindowFlags);
 		{
 			ImGui::Text("Server is off");
-			gui::ButtonWithPos("##TryConnection", ImVec2(50, 50), ImVec2(100, 100));
+			GuiUtils::ButtonWithPos("##TryConnection", ImVec2(50, 50), ImVec2(100, 100));
 		}
 	}
 #ifdef _WINDLL

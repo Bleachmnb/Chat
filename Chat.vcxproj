@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Chat-gui\Chat.cpp" />
+    <ClCompile Include="src\Chat-gui\Gui\GuiUtils\GuiUtils.cpp" />
     <ClCompile Include="src\Chat-gui\HttpsConnection\HttpsConnection.cpp" />
     <ClCompile Include="src\Chat-gui\Gui\gui.cpp" />
     <ClCompile Include="src\Chat-gui\main.cpp" />
@@ -155,8 +156,8 @@
     <ClCompile Include="src\ImGui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Chat-gui\Channel\Channel.h" />
     <ClInclude Include="src\Chat-gui\Chat.h" />
+    <ClInclude Include="src\Chat-gui\Gui\GuiUtils\GuiUtils.h" />
     <ClInclude Include="src\Chat-gui\HttpsConnection\HttpsConnection.h" />
     <ClInclude Include="src\Chat-gui\Gui\gui.h" />
     <ClInclude Include="src\Chat-gui\EngineGui\EngineGui.h" />
