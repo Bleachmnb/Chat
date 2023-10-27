@@ -41,3 +41,4 @@
 *.vb
 *.db
 # End of https://www.toptal.com/developers/gitignore/api/c++
+.vs/Chat/v17/Browse.VC.db
